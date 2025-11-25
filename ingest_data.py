@@ -61,4 +61,5 @@ def main():
     data = ingest_data(url)
     raw_to_db(data, engine, raw_name)
 
-main()
+if __name__ == "__main__":
+    main()
