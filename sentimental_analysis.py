@@ -7,9 +7,9 @@ db_name = "proj_data_analysis"
 user = "postgres"
 table_name = "analyzed_reviews"
 
-kw_app = [word.lower() for word in ["app", "helpful", "user friendly", "facilities", "application", "supportive"]]
-kw_finance = [word.lower() for word in ["charged", "pay", "payment", "money", "extra money"]]
-kw_trip = [word.lower() for word in ["service", "trip", "excelent", "safest", "waiting", "driver", "ride", "pickup"]]
+kw_app = [word.lower() for word in ["app", "helpful", "user friendly", "facilities", "application", "supportive", "Customer", "location", "rates", "promos", "loggin"]]
+kw_finance = [word.lower() for word in ["charged", "pay", "payment", "money", "extra money", "price", "inflated", "pricing", "extortion", "paying", "expensive", "cheap", "charge"]]
+kw_trip = [word.lower() for word in ["service", "trip", "excelent", "safest", "waiting", "driver", "ride", "pickup", "travel", "car", "bike", "services"]]
 
 def main(db_name, user):
     engine = connect_to_db(db_name, user)
@@ -43,7 +43,7 @@ def classify_sentiment(df):
     df["sentiment"] = pd.cut(df["confidence"], bins=bins, labels=labels)
     return df
 
-def send_to_db(df, engine, sql_table, if_case="append"):
+def send_to_db(df, engine, sql_table, if_case="replace"):
     df.to_sql(sql_table, engine, if_exists=if_case, index=False)
     return
 
